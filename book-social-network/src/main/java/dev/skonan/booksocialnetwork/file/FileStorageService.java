@@ -20,7 +20,7 @@ import static java.lang.System.currentTimeMillis;
 @Slf4j
 @RequiredArgsConstructor
 public class FileStorageService {
-    @Value("${application.file.upload.photos-output-path}")
+    @Value("${application.file.uploads.photos-output-path}")
     private String fileUploadPath;
 
     public String saveFile(
@@ -53,6 +53,7 @@ public class FileStorageService {
         // ./upload/users/1/cover.jpg
         String targetFilePath = finalUploadPath + separator + currentTimeMillis() + "." + fileExtension;
         Path targetPath = Paths.get(targetFilePath);
+
         try {
             Files.write(targetPath, sourceFile.getBytes());
             log.info("File saved to: " + targetFilePath);
@@ -61,6 +62,7 @@ public class FileStorageService {
         } catch (IOException e) {
             log.error("File was not saved", e);
         }
+
         return null;
     }
 
