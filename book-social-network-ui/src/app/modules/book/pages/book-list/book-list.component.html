@@ -1,0 +1,44 @@
+<h3>Books list</h3>
+<div class="alert" *ngIf="message" [class.alert-danger]="level === 'error'" [class.alert-success]="level === 'success'">
+  {{ message }}
+</div>
+<hr>
+<div class="d-flex justify-content-start gap-2 flex-wrap">
+  <app-book-card *ngFor="let book of bookResponse.content" [book]="book" (borrow)="borrowBook($event)"></app-book-card>
+</div>
+<div class="d-flex justify-content-center mt-3">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" aria-label="Previous" [class.disabled]="page === 0"
+          (click)="goToFirstPage()">
+          <i class="fa-solid fa-angle-left"></i>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" aria-label="Previous" [class.disabled]="page === 0"
+          (click)="goToPreviousPage()">
+          <i class="fa-solid fa-angle-left"></i>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let item of [].constructor(this.bookResponse.totalPages); let pageIndex = index">
+        <a class="page-link" href="javascript:void(0)" [class.active]="page === pageIndex"
+          (click)="goToPage(pageIndex)">
+          {{ pageIndex + 1 }}
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" aria-label="Next" [class.disabled]="isLastPage"
+          (click)="goToNextPage()">
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" aria-label="Next" [class.disabled]="isLastPage"
+          (click)="goToLastPage()">
+          <i class="fa-solid fa-angles-right"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

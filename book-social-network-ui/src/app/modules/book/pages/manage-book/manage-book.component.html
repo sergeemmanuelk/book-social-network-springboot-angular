@@ -1,0 +1,50 @@
+<div class="p-2">
+  <h2>Manage my book</h2>
+  <hr>
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
+    <p class="p-0 m-0" *ngFor="let message of errorMsg">{{ message }}</p>
+  </div>
+  <div class="d-flex gap-2">
+    <div class="col-3">
+      <img class="rounded-1" [src]="selectedPicture || 'https://source.unsplash.com/user/c_v_r/1900x800'" alt=""
+        width="100%" height="100%" />
+      <div class="mt-2">
+        <input id="formFile" class="form-control" type="file" accept="image/*" (change)="onFileSelected($event)">
+      </div>
+    </div>
+    <div class="col-9">
+      <form class="row g-3">
+        <div class="col-12">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" class="form-control" name="title" placeholder="Book title" [(ngModel)]="bookRequest.title">
+        </div>
+        <div class="col-6">
+          <label for="author" class="form-label">author name</label>
+          <input type="text" id="author" class="form-control" name="author" placeholder="Author name"
+            [(ngModel)]="bookRequest.authorName">
+        </div>
+        <div class="col-6">
+          <label for="isbn" class="form-label">ISBN</label>
+          <input type="text" id="isbn" class="form-control" name="isbn" placeholder="ISBN" [(ngModel)]="bookRequest.isbn">
+        </div>
+        <div class="col-12">
+          <label for="synopsis" class="form-label">Synopsis</label>
+          <textarea id="synopsis" class="form-control" rows="4" name="synopsis" placeholder="Enter book synopsis"
+            [(ngModel)]="bookRequest.synopsis"></textarea>
+        </div>
+        <div class="col-12">
+          <input type="checkbox" id="share-me" class="form-check-input" name="shareable" [(ngModel)]="bookRequest.shareable">
+          <label for="share-me" class="form-check-label">Share me</label>
+        </div>
+        <div class="d-flex justify-content-end gap-2 col-12">
+          <button type="submit" class="btn btn-outline-primary" (click)="saveBook()">
+            <i class="fas fa-save"></i>&nbsp;Save
+          </button>
+          <a routerLink="/books/my-books" class="btn btn-link text-danger">
+            <i class="fas fa-times"></i>&nbsp;Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
